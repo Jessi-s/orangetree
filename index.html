@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Der schwebende Orangenbaum - Name </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+</head>
+<body>
+
+
+    <header class="hero">
+        <div class="hero-inner">
+            <p class="plakette">3D-Modell des Orangenbaums </p>
+            <h1 class="hero-titel">The Marvelous Orange Tree</h1>
+            <p class="hero-dating">Der Orangenbaum nach Jean Eugène Robert-Houdin </p>
+            <p class="hero-text">
+                Der Orangenbaum nach Jean-Eugène Robert-Houdin ist eine faszinierende Illusion der klassischen Zauberkunst. Während der Vorführung verwandelt sich der zunächst unscheinbare Baum Schritt für Schritt: Blüten erscheinen, Orangen wachsen heran und schließlich wird ein goldener Ring sichtbar, der zuvor aus dem Publikum entnommen wurde.
+                Das Zusammenspiel aus Mechanik, Bewegung und Inszenierung macht den Orangenbaum zu einem eindrucksvollen Beispiel für die Verbindung von technischer Raffinesse und magischer Illusion.
+            </p>
+        </div>
+
+
+        <figure class="podest">
+            <div class="ansicht-schalter" role="group" aria-label="Ansicht wählen">
+                <button type="button" class="ansicht-btn aktiv" data-modell="assets/models/modell.glb">Phase 0</button>
+                <button type="button" class="ansicht-btn" data-modell="assets/models/modell2.glb">Phase 3</button>
+            </div>
+
+            <model-viewer
+                id="viewerVorschau"
+                src="assets/models/modell.glb"
+                alt="3D-Ansicht der Statue"
+                camera-orbit="90deg 90deg auto"
+                camera-controls
+                auto-rotate
+                interaction-prompt="none"
+                shadow-intensity="1.4"
+                shadow-softness="1"
+                exposure="1.15"
+                environment-image="neutral">
+                <div class="fehlt" slot="poster">
+                    <strong>Kein Modell hinterlegt</strong>
+                    <span>Datei unter assets/models/modell.glb ablegen</span>
+                </div>
+            </model-viewer>
+
+            <button class="oeffnen-btn" id="modellOeffnen" type="button">
+                <span class="oeffnen-icon" aria-hidden="true">⤢</span>
+                Modell öffnen
+            </button>
+            <figcaption class="podest-schild">Objekt drehen: ziehen · Zoom: scrollen</figcaption>
+        </figure>
+    </header>
+
+    <main>
+
+
+        <section id="galerie" class="saal">
+            <div class="saal-kopf">
+                <p class="eyebrow">Bildtafeln</p>
+                <h2>Ansichten &amp; Details</h2>
+            </div>
+
+            <div class="galerie-buehne">
+                <div class="buehne-bild">
+                    <button class="pfeil pfeil-zurueck" id="bildZurueck" type="button" aria-label="Vorheriges Bild">‹</button>
+                    <img id="aktivesBild" src="" alt="">
+                    <button class="pfeil pfeil-vor" id="bildVor" type="button" aria-label="Nächstes Bild">›</button>
+                    <div class="fehlt versteckt" id="galerieFehlt">
+                        <strong>Keine Bilder hinterlegt</strong>
+                        <span>Dateien in assets/fotos/ ablegen und in js/script.js eintragen</span>
+                    </div>
+                </div>
+
+
+                <aside class="buehne-text">
+                    <p class="tafel-nr" id="tafelNr">Tafel 01 / 05</p>
+                    <h3 id="bildTitel">—</h3>
+                    <div class="tafel-linie"></div>
+                    <p id="bildText">—</p>
+                </aside>
+            </div>
+
+            <div class="filmstreifen" id="filmstreifen"></div>
+        </section>
+
+ 
+        <section id="film" class="saal saal-dunkel">
+            <div class="saal-kopf">
+                <p class="eyebrow">Bewegtbild</p>
+                <h2>Animation</h2>
+            </div>
+
+            <button class="video-tafel" id="videoTafel" type="button">
+                <video id="videoVorschau" muted preload="metadata" playsinline>
+                    <source src="assets/videos/video.mp4" type="video/mp4">
+                </video>
+                <span class="video-play" aria-hidden="true">▶</span>
+                <span class="video-label">Film abspielen</span>
+                <span class="fehlt versteckt" id="videoFehlt">
+                    <strong>Kein Video hinterlegt</strong>
+                    <span>Datei unter assets/videos/video.mp4 ablegen</span>
+                </span>
+            </button>
+        </section>
+
+    </main>
+
+    <footer class="fuss">
+        <p class="fuss-name">The Marvelous Orange Tree</p>
+        <p class="fuss-klein">Jessica Schuster I 2026</p>
+    </footer>
+
+
+
+    <div class="overlay versteckt" id="overlay">
+        <button class="overlay-schliessen" id="overlaySchliessen" type="button" aria-label="Schließen">&times;</button>
+
+        <div class="overlay-inhalt versteckt" id="overlayModell">
+            <model-viewer
+                id="viewerGross"
+                src="assets/models/modell.glb"
+                alt="3D-Ansicht der Statue, große Ansicht"
+                camera-orbit="90deg 90deg auto"
+                camera-controls
+                auto-rotate
+                shadow-intensity="1.4"
+                shadow-softness="1"
+                exposure="1.15"
+                environment-image="neutral">
+            </model-viewer>
+            <p class="overlay-schild">Drehen: ziehen · Zoom: scrollen · Verschieben: Rechtsklick + ziehen</p>
+        </div>
+
+
+        <div class="overlay-inhalt versteckt" id="overlayVideo">
+            <video id="videoGross" controls playsinline>
+                <source src="assets/videos/video.mp4" type="video/mp4">
+            </video>
+        </div>
+
+
+        <div class="overlay-inhalt versteckt" id="overlayBild">
+            <img id="overlayBildImg" src="" alt="Großansicht">
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
